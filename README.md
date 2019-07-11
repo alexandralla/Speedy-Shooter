@@ -2,7 +2,7 @@
 Shooting game project made for CS410-OpenSourceSoftware
 
 ## Creator
-Alexandra Llamas
+Alexandra Llamas, Evan DePosit
 
 ## Project Description
 This project is a simple game based on the classic arcade game Galaga. When run, a new window opens up and the user enters the game. 
