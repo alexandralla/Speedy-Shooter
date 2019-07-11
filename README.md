@@ -1,7 +1,7 @@
 # Speedy-Shooter
 Shooting game project made for CS410-OpenSourceSoftware
 
-## Creator
+## Creators
 Alexandra Llamas, Evan DePosit
 
 ## Project Description
