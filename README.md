@@ -1,15 +1,15 @@
 # Speedy-Shooter
 Shooting game project made for CS410-OpenSourceSoftware
 
-##Creator
+## Creator
 Alexandra Llamas
 
-##Project Description
+## Project Description
 This project is a simple game based on the classic arcade game Galaga. When run, a new window opens up and the user enters the game. 
 The controls the user has are spacebar to shoot and the left/right arrow keys.
 The objective of the game is to live as long as possible by shooting invaders before they get too close! 
 
-##Installation, Build, and Run
+## Installation, Build, and Run
 Before running, use the package manager pip to install pygame.
 
 To install pip, type the following into the command line:
@@ -33,5 +33,5 @@ Python3 SpeedyShooter.py
 ```
 
 
-##License
+## License
 This program is licensed under the "MIT License". Please see the file LICENSE in the source distribution of this software for license terms.
