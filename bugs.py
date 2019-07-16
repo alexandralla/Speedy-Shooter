@@ -25,7 +25,7 @@ def move_img(x, y, dir, speed):
 def px_to_grid(length, pxPerUnit):
     return int(length/pxPerUnit)
 
-class Game_Piece():
+class Bug(pygame.sprite.Sprite):
     def __init__(self, img, screenX, screenY, pxPerUnit):
         self.image = pygame.image.load(img)
         self.screenX = screenX
@@ -33,12 +33,17 @@ class Game_Piece():
         #grid functions maybe change this to calculate the objects grid location based on its center.
         self.gridX = px_to_grid(self.screenX, pxPerUnit) 
         self.gridY = px_to_grid(self.screenY, pxPerUnit)
-    
+        self.rect = self.image.get_rect()
+        
     def change_position(self, changeX, changeY, pxPerUnit):
         self.screenX= self.screenX + changeX
         self.screenY = self.screenY + changeY
         self.gridX= px_to_grid(self.screenX, pxPerUnit) 
         self.gridY= px_to_grid(self.screenY, pxPerUnit) 
+
+    def update_rect(self):
+        self.rect.x=self.screenX
+        self.rect.y=self.screenY
 
 # -------------------------------------------------------
 #                        main 
@@ -71,17 +76,18 @@ DISPLAYSURF.fill(WHITE)
 #rect1= pygame.Rect(0, 0, 20, 20)
 #pygame.draw.rect(DISPLAYSURF, RED, rect1)
 
-#make bug as surface
-bug1= pygame.image.load('bug.png')
-bug1=Game_Piece('bug.png', 0, 0, pxPerUnit)
+bug1=Bug('bug.png', 0, 0, pxPerUnit)
+bug1.update_rect()
 DISPLAYSURF.blit(bug1.image, (bug1.screenX, bug1.screenY))
 
 #make bug as game piece
-bug2= Game_Piece('bug.png', 50, 0, pxPerUnit)
+bug2= Bug('bug.png', 50, 0, pxPerUnit)
+bug2.update_rect()
 DISPLAYSURF.blit(bug2.image, (bug2.screenX, bug2.screenY))
 
 #makle stationary bug to colide with
-bug3= Game_Piece('bug.png', 50, 200, pxPerUnit)
+bug3= Bug('bug.png', 50, 200, pxPerUnit)
+bug3.update_rect()
 DISPLAYSURF.blit(bug3.image, (bug3.screenX, bug3.screenY))
 
 # main game loop
@@ -97,14 +103,14 @@ while True:
     #bug1.image.fill(WHITE)
     if bug1.screenX > screenWidth:
         bugDirection= -1
-    
     if bug1.screenX < 0:
         bugDirection=1
-
     bug1.screenX = bug1.screenX + bugDirection
+    bug1.update_rect()
 
     DISPLAYSURF.blit(bug2.image, (bug2.screenX, bug2.screenY))
     bug2.change_position(0, 1, pxPerUnit)
+    bug2.update_rect()
 
     DISPLAYSURF.blit(bug3.image, (bug3.screenX, bug3.screenY))
 
