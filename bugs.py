@@ -70,7 +70,7 @@ FPS = 30
 fpsClock = pygame.time.Clock()
 
 pygame.init()
-DISPLAYSURF= pygame.display.set_mode((screenHeight, screenWidth))
+DISPLAYSURF= pygame.display.set_mode((screenWidth, screenHeight))
 pygame.display.set_caption('Hello World!')
 DISPLAYSURF.fill(WHITE)
 
@@ -126,11 +126,9 @@ while True:
 
     DISPLAYSURF.blit(bug1.image, (bug1.x, bug1.y))
     #bug1.image.fill(WHITE)
-    if bug1.x >= screenWidth:
+    if bug1.rect.right >= screenWidth:
         bugDirection= -5
-        print(bug1.x)
-        print(bug1.rect.right)
-    if bug1.x < 0:
+    if bug1.rect.left <= 0:
         bugDirection=5
     bug1.x = bug1.x + bugDirection
     bug1.update_rect()
