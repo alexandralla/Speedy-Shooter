@@ -1,22 +1,22 @@
 import pygame
 pygame.init()
 
+window = pygame.display.set_mode((500, 500))
+pygame.display.set_caption('Speedy Shooter')
+spaceShip = pygame.image.load('ship.png')
 
-#starter code simply sets up game widow and allows users to control a "character" with the arrow keys
-win = pygame.display.set_mode((500,500))
-
-pygame.display.set_caption("first game")
-
-x = 50
-y = 50
-width = 40
-height = 60
-vel = 15
+x = 220
+y = 450
+velocity = 10
 
 run = True
 
+def ship(x, y):
+    window.blit(spaceShip, (x, y))
+
 while run:
-    pygame.time.delay(100)
+
+    pygame.time.delay(8)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -24,21 +24,24 @@ while run:
 
     keys = pygame.key.get_pressed()
 
-    if keys[pygame.K_LEFT]:
-        x -= vel
+    if keys[pygame.K_LEFT] and x > 13:
+        x -= velocity
 
-    if keys[pygame.K_RIGHT]:
-        x += vel
+    if keys[pygame.K_RIGHT] and x < 450:
+        x += velocity
 
-    if keys[pygame.K_UP]:
-        y -= vel
+    if keys[pygame.K_UP] and y > 0:
+        y -= velocity
 
-    if keys[pygame.K_DOWN]:
-        y += vel
+    if keys[pygame.K_DOWN] and y < 450:
+        y += velocity
 
-    win.fill((0,0,0))
+    #if keys[pygame.K_SPACE]:
 
-    pygame.draw.rect(win, (255, 0, 0), (x,y, width, height))
+
+    window.fill((0, 0, 0))
+
+    ship(x, y)
     pygame.display.update()
 
 pygame.quit()
