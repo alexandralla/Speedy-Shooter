@@ -91,6 +91,7 @@ movingBugs.add(bug2)
 stationaryBugs=pygame.sprite.Group()
 stationaryBugs.add(bug3)
 
+newFire=None
 
 #had to initialize the bug direction so that bug 1 can move back and forth
 bugDirection=5
@@ -119,7 +120,9 @@ while True:
         bugDirection=5
     bug1.x = bug1.x + bugDirection
     bug1.update_rect()
-    bug1.update()
+    newFire= bug1.update()
+    if newFire:
+        activeFire.add(newFire)
 
     for bullet in activeFire:
         bullet.update()

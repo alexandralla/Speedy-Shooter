@@ -31,7 +31,8 @@ class Bug(pygame.sprite.Sprite):
         randomNum= random.randint(1,10)
         if randomNum == 1:
             newBullet= fire.Enemy_Fire(self)
-            #activeFire.add(newBullet) 
+            return newBullet
+        return None
 
     def bounce(self):
         pass
