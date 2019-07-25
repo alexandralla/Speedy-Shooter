@@ -1,0 +1,17 @@
+alex to do:
+add player_fire to Fire class
+add firing ability to player ship
+make bumper class
+
+Evan to do:
+add move function as attribute to bug class
+make different move functions to pass to bug constructor
+add call to move attribute in update function
+
+General to do:
+problem: figure out way to add enemy fire fire sprite group in main
+solution: bug update function could return Fire() object or a or list 
+or set of objects latter if more than one type of object needs to added 
+to the main game loop.  Would then need to check their type 
+and add them to the appropriate sprite groups
+
