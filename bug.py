@@ -4,7 +4,7 @@ import random
 import fire
 
 class Bug(pygame.sprite.Sprite):
-    def __init__(self, img, x, y):
+    def __init__(self, img, x, y, move=None):
         #pygame.sprite.Sprite.init(self)
         super().__init__()
         self.image = pygame.image.load(img)

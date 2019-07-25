@@ -7,11 +7,12 @@ Evan to do:
 add move function as attribute to bug class
 make different move functions to pass to bug constructor
 add call to move attribute in update function
+default is just to stand still
 
-General to do:
-problem: figure out way to add enemy fire fire sprite group in main
-solution: bug update function could return Fire() object or a or list 
-or set of objects latter if more than one type of object needs to added 
-to the main game loop.  Would then need to check their type 
-and add them to the appropriate sprite groups
+X General to do:
+X problem: figure out way to add enemy fire fire sprite group in main
+X solution: bug update function could return Fire() object or a or list 
+X or set of objects latter if more than one type of object needs to added 
+X to the main game loop.  Would then need to check their type 
+X and add them to the appropriate sprite groups
 
