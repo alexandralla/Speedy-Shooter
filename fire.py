@@ -14,7 +14,12 @@ class Enemy_Fire(pygame.sprite.Sprite):
     
     def update(self):
         self.move()
-
+        self.update_rect()
+        
     def move(self):
         self.x=self.x + self.velocityX
         self.y=self.y + self.velocityY
+
+    def update_rect(self):
+        self.rect.x=self.x
+        self.rect.y=self.y

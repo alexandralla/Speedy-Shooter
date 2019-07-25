@@ -79,22 +79,19 @@ smartBugs.add(bug1)
 #activeFire.add(fire)
 
 #bug3 is stationary so that bug2 can hit it
-bug3= bug.Bug('bug.png', 50, 200)
-bug3.update_rect()
-DISPLAYSURF.blit(bug3.image, (bug3.x, bug3.y))
 stationaryBugs=pygame.sprite.Group()
-stationaryBugs.add(bug3)
+x=0
+for i in range(0,10):
+    bugTarget= bug.Bug('bug.png', 0+x, screenHeight-50)
+    bugTarget.update_rect()
+    DISPLAYSURF.blit(bugTarget.image, (bugTarget.x, bugTarget.y))
+    stationaryBugs.add(bugTarget)
+    x=x+50
 
 count=0
 while True:
     DISPLAYSURF.fill(BLACK)
 
-    if activeFire:
-        for bug in stationaryBugs:
-            print("bug")
-            collisionList= pygame.sprite.spritecollide(bug, activeFire, True)
-            if collisionList:
-                stationaryBugs.remove(bug)    
 
     DISPLAYSURF.blit(bug1.image, (bug1.x, bug1.y))
     #bug1.image.fill(WHITE)
@@ -107,8 +104,7 @@ while True:
     newFire= bug1.update()
     if newFire:
         activeFire.add(newFire)
-        count= count +1
-        print(count)
+
 
     if activeFire:
         for bullet in activeFire:
@@ -118,6 +114,19 @@ while True:
     #dra stationary bugs group
     for bug in stationaryBugs:
         DISPLAYSURF.blit(bug.image, (bug.x, bug.y))
+
+   #if activeFire:
+   #    for bug in stationaryBugs:
+   #        collisionList= pygame.sprite.spritecollide(bug, activeFire, True)
+   #        if collisionList:
+   #            stationaryBugs.remove(bug)    
+
+    #probably want to have smallest list in inner loop
+    if activeFire:
+        for bullet in activeFire:
+            collisionList= pygame.sprite.spritecollide(bullet, stationaryBugs, True)
+            if collisionList:
+                activeFire.remove(bullet)
 
     for event in pygame.event.get():
         if event.type == QUIT:
