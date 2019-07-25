@@ -4,10 +4,6 @@ import random
 import bug
 import fire
 
-# -------------------------------------------------------
-#                        main 
-# -------------------------------------------------------
-
 #set up grid
 screenHeight=400
 screenWidth=300

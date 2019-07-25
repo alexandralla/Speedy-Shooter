@@ -4,43 +4,6 @@ import random
 import bug
 import fire
 
-#def move_rect(rectObj, dir, speed):
-#    if dir == "down":
-#        rectObj.top=rectObj.top + speed
-#    elif dir =="up":
-#        rectObj.top=rectObj.top + speed
-#    elif dir == "left":
-#        rectObj.top=rectObj.left - speed
-#    else:
-#        rectObj.top=rectObj.left + speed
-#
-#def move_img(x, y, dir, speed):
-#    if dir == "down":
-#        y = y + speed
-#    elif dir == "up":
-#        y = y + speed
-#    elif dir == "left":
-#        x = x - speed
-#    else:
-#        x = x + speed
-
-#def px_to_grid(length):
-#    return int(length/pxPerUnit)
-
-#class Game_Object(pygame.sprite.Sprite):
-#    def __init__(self):
-#        super().__init__()
-#
-
-
-
-
-
-
-# -------------------------------------------------------
-#                        main 
-# -------------------------------------------------------
-
 #set up grid
 screenHeight=400
 screenWidth=300
@@ -74,9 +37,6 @@ DISPLAYSURF.blit(bug1.image, (bug1.x, bug1.y))
 
 smartBugs=pygame.sprite.Group()
 smartBugs.add(bug1)
-
-#fire=fire.Enemy_Fire(bug1)
-#activeFire.add(fire)
 
 #bug3 is stationary so that bug2 can hit it
 stationaryBugs=pygame.sprite.Group()
