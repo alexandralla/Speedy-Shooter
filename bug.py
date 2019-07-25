@@ -2,25 +2,29 @@ import pygame, sys
 from pygame.locals import *
 import random
 import fire
+import move as mv
 
 class Bug(pygame.sprite.Sprite):
-    def __init__(self, img, x, y, move=None):
+    def __init__(self, img, x, y, xVelocity=0, yVelocity=0, move=None):
         #pygame.sprite.Sprite.init(self)
         super().__init__()
         self.image = pygame.image.load(img)
         self.x = x
         self.y = y
+        self.xVelocity=xVelocity
+        self.yVelocity=yVelocity
         self.rect = self.image.get_rect()
-        self.move=None
-        self.gridX = None 
-        self.gridY = None
+        if move is None:
+            self.move=mv.simple_move
+        else:
+            self.move=move
+        self.update_rect()
+        #self.gridX = None 
+        #self.gridY = None
 
-    def change_position(self, changeX, changeY):
-        self.x= self.x + changeX
-        self.y = self.y + changeY
-        if (self.gridX is not None and self.gridY is not None):
-            self.gridX= px_to_grid(self.x) 
-            self.gridY= px_to_grid(self.y) 
+#   def simple_move(self):
+#       self.x= self.x + self.xVelocity
+#       self.y = self.y + self.yVelocity
 
     def update_rect(self):
          self.rect.x=self.x
@@ -28,6 +32,8 @@ class Bug(pygame.sprite.Sprite):
 
     def update(self):
         global activeFire
+        self.move(self)
+        self.update_rect()
         randomNum= random.randint(1,10)
         if randomNum == 1:
             newBullet= fire.Enemy_Fire(self)

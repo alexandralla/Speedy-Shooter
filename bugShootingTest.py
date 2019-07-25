@@ -92,36 +92,30 @@ count=0
 while True:
     DISPLAYSURF.fill(BLACK)
 
+    #draw/update stationary bugs group
+    for bug in stationaryBugs:
+        bug.update()
+        DISPLAYSURF.blit(bug.image, (bug.x, bug.y))
 
+    #display/update moving bug
     DISPLAYSURF.blit(bug1.image, (bug1.x, bug1.y))
-    #bug1.image.fill(WHITE)
+    newFire= bug1.update()
+    if newFire:
+        activeFire.add(newFire)
+    #move bug this code will be deleted when bumpers added
     if bug1.rect.right >= screenWidth:
         bugDirection= -5
     if bug1.rect.left <= 0:
         bugDirection=5
     bug1.x = bug1.x + bugDirection
-    bug1.update_rect()
-    newFire= bug1.update()
-    if newFire:
-        activeFire.add(newFire)
 
-
+    #display and update bullets
     if activeFire:
         for bullet in activeFire:
             bullet.update()
             DISPLAYSURF.blit(bullet.image, (bullet.x, bullet.y))
 
-    #dra stationary bugs group
-    for bug in stationaryBugs:
-        DISPLAYSURF.blit(bug.image, (bug.x, bug.y))
-
-   #if activeFire:
-   #    for bug in stationaryBugs:
-   #        collisionList= pygame.sprite.spritecollide(bug, activeFire, True)
-   #        if collisionList:
-   #            stationaryBugs.remove(bug)    
-
-    #probably want to have smallest list in inner loop
+    #check for collisions with bullets and bugs
     if activeFire:
         for bullet in activeFire:
             collisionList= pygame.sprite.spritecollide(bullet, stationaryBugs, True)
