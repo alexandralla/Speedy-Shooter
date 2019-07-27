@@ -22,7 +22,6 @@ fpsClock = pygame.time.Clock()
 #initialize some variables
 newFire=None
 collisionList=None
-bugDirection=5
 activeFire=pygame.sprite.Group()
 
 pygame.init()
@@ -59,10 +58,6 @@ for i in range(0,10):
 count=0
 while True:
     DISPLAYSURF.fill(BLACK)
-
-    #can get rid of display code probably
-   #for bumper in bumpers:
-   #    DISPLAYSURF.blit(bumper.image, (bumper.x, bumper.y))
 
     #check for collisions with bumpers
     collisionList= pygame.sprite.spritecollide(bug1, bumpers, False)
