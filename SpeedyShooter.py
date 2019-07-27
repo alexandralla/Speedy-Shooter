@@ -43,6 +43,8 @@ def ship(x, y):
 #while game is running
 while gamePlay:
 
+    pygame.time.wait(20)
+
     #check for game exit
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -64,8 +66,9 @@ while gamePlay:
         y += velocity
 
     if keys[pygame.K_SPACE]:
-        newShot = bullet(x, y)
-        activeBullets.append(newShot)
+        if len(activeBullets) < 20:
+            newShot = bullet(x, y)
+            activeBullets.append(newShot)
 
 
     #fire the bullets
