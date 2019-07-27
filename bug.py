@@ -2,7 +2,7 @@ import pygame, sys
 from pygame.locals import *
 import random
 import fire
-import move as mv
+#import move as mv
 
 class Bug(pygame.sprite.Sprite):
     def __init__(self, img, x, y, xVelocity=0, yVelocity=0, move=None):
@@ -15,7 +15,7 @@ class Bug(pygame.sprite.Sprite):
         self.yVelocity=yVelocity
         self.rect = self.image.get_rect()
         if move is None:
-            self.move=mv.simple_move
+            self.move=simple_move
         else:
             self.move=move
         self.update_rect()
@@ -58,3 +58,7 @@ class Bumper(pygame.sprite.Sprite):
     def update_rect(self):
         self.rect.x=self.x
         self.rect.y=self.y
+
+def simple_move(bug):
+        bug.x= bug.x + bug.xVelocity
+        bug.y = bug.y + bug.yVelocity
