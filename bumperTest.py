@@ -1,6 +1,6 @@
 import pygame, sys
 from pygame.locals import *
-import bumper
+import bug
 
 #set up grid
 screenHeight=400
@@ -22,10 +22,10 @@ DISPLAYSURF= pygame.display.set_mode((screenWidth, screenHeight))
 pygame.display.set_caption('bumper test')
 DISPLAYSURF.fill(WHITE)
 
-bumperTop=bumper.Bumper(screenWidth, 1, 0, 0)
-bumperBottom=bumper.Bumper(screenWidth, 1, 0, screenHeight-1)
-bumperRight=bumper.Bumper(1, screenHeight, screenWidth-1, 0)
-bumperLeft=bumper.Bumper(1, screenHeight, 0, 0)
+bumperTop=bug.Bumper(screenWidth, 1, 0, 0)
+bumperBottom=bug.Bumper(screenWidth, 1, 0, screenHeight-1)
+bumperRight=bug.Bumper(1, screenHeight, screenWidth-1, 0)
+bumperLeft=bug.Bumper(1, screenHeight, 0, 0)
 
 bumpers=pygame.sprite.Group()
 bumpers.add(bumperTop)
