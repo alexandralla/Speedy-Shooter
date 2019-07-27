@@ -30,15 +30,23 @@ DISPLAYSURF= pygame.display.set_mode((screenWidth, screenHeight))
 pygame.display.set_caption('shooting test')
 DISPLAYSURF.fill(WHITE)
 
-#bug1 moves back and forth
-bug1=bug.Bug('bug.png', 0, 0)
-bug1.update_rect()
-DISPLAYSURF.blit(bug1.image, (bug1.x, bug1.y))
+#make bumpers
+bumperTop=bug.Bumper('top', screenWidth, 1, 0, 0)
+bumperBottom=bug.Bumper('bottom', screenWidth, 1, 0, screenHeight-1)
+bumperRight=bug.Bumper('right', 1, screenHeight, screenWidth-1, 0)
+bumperLeft=bug.Bumper('left', 1, screenHeight, 0, 0)
+bumpers=pygame.sprite.Group()
+bumpers.add(bumperTop)
+bumpers.add(bumperRight)
+bumpers.add(bumperBottom)
+bumpers.add(bumperLeft)
 
+bug1=bug.Bug('bug.png', 1, 1, 5, 0)
+DISPLAYSURF.blit(bug1.image, (bug1.x, bug1.y))
 smartBugs=pygame.sprite.Group()
 smartBugs.add(bug1)
 
-#bug3 is stationary so that bug2 can hit it
+#make target bugs
 stationaryBugs=pygame.sprite.Group()
 x=0
 for i in range(0,10):
@@ -52,6 +60,15 @@ count=0
 while True:
     DISPLAYSURF.fill(BLACK)
 
+    #can get rid of display code probably
+   #for bumper in bumpers:
+   #    DISPLAYSURF.blit(bumper.image, (bumper.x, bumper.y))
+
+    #check for collisions with bumpers
+    collisionList= pygame.sprite.spritecollide(bug1, bumpers, False)
+    if collisionList: 
+        bug1.bounce(collisionList)
+        
     #draw/update stationary bugs group
     for bug in stationaryBugs:
         bug.update()
@@ -62,12 +79,6 @@ while True:
     newFire= bug1.update()
     if newFire:
         activeFire.add(newFire)
-    #move bug this code will be deleted when bumpers added
-    if bug1.rect.right >= screenWidth:
-        bugDirection= -5
-    if bug1.rect.left <= 0:
-        bugDirection=5
-    bug1.x = bug1.x + bugDirection
 
     #display and update bullets
     if activeFire:
