@@ -40,14 +40,22 @@ class Bug(pygame.sprite.Sprite):
             return newBullet
         return None
 
-    def bounce(self):
-        pass
+    def bounce(self, bumpers):
+        id=set()
+        for bumper in bumpers:
+            id.add(bumper.id)
+        
+        if 'left' in id or 'right' in id:
+            self.xVelocity=self.xVelocity * -1
+
+        if 'top' in id or 'bottom' in id:
+            self.yVelocity=self.yVelocity * -1
+        
 
 class Bumper(pygame.sprite.Sprite):
-    def __init__(self, width, height, x, y):
+    def __init__(self, id, width, height, x, y):
         super().__init__()
-        print(width)
-        print(height)
+        self.id=id
         self.image=pygame.Surface((width, height))
         self.image.fill((255,   255,   255))
         self.x=x
