@@ -18,14 +18,20 @@ for i in range(0,10):
     stationaryBugs.add(bugTarget)
     x = x+50
 
+
 #starting ship position coordinants
 x = 220
 y = 450
 velocity = 10
 
-RED = (255, 0, 0)
-activeBullets = []
+# set up the colors
+BLACK = (  0,   0,   0)
+WHITE = (255, 255, 255)
+RED   = (255,   0,   0)
+GREEN = (  0, 255,   0)
+BLUE  = (  0,   0, 255)
 
+activeBullets = []
 
 gamePlay = True
 
@@ -44,27 +50,24 @@ class bullet(pygame.sprite.Sprite):
 #function used for updating game actions and drawing
 def updateWindow(x, y):
 
-    window.fill((0, 0, 0))
-    ship(x, y)
+    window.blit(spaceShip, (x, y))
     for shots in activeBullets:
         shots.draw(window)
     pygame.display.update()
 
 
-def ship(x, y):
-    window.blit(spaceShip, (x, y))
-
 #while game is running
 while gamePlay:
 
     pygame.time.wait(20)
+    window.fill(BLACK)
 
     #check for game exit
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             gamePlay = False
 
-     # draw/update stationary bugs group
+    # draw/update stationary bugs group
     for bug in stationaryBugs:
         bug.update()
         window.blit(bug.image, (bug.x, bug.y))
