@@ -16,11 +16,23 @@ spaceShip = ship.Ship(screenWidth/2, screenHeight - 50)
 
 collisionList=None
 
+bumperTop=bug.Bumper('top', screenWidth, 1, 0, 0)
+bumperBottom=bug.Bumper('bottom', screenWidth, 1, 0, screenHeight-1)
+bumperRight=bug.Bumper('right', 1, screenHeight, screenWidth-1, 0)
+bumperLeft=bug.Bumper('left', 1, screenHeight, 0, 0)
+
+bumpers=pygame.sprite.Group()
+bumpers.add(bumperTop)
+bumpers.add(bumperRight)
+bumpers.add(bumperBottom)
+bumpers.add(bumperLeft)
+
+
 #make target bugs
 stationaryBugs=pygame.sprite.Group()
 x=0
 for i in range(0,10):
-    bugTarget = bug.Bug('bug.png', 0+x, 50)
+    bugTarget = bug.Bug('bug.png', 0+x, 50, 5, 10)
     bugTarget.update_rect()
     window.blit(bugTarget.image, (bugTarget.x, bugTarget.y))
     stationaryBugs.add(bugTarget)
@@ -41,6 +53,7 @@ BLUE  = (  0,   0, 255)
 
 
 gamePlay = True
+shipAlive = True
 
 #while game is running
 while gamePlay:
@@ -58,10 +71,19 @@ while gamePlay:
         bug.update()
         window.blit(bug.image, (bug.x, bug.y))
 
+    for bumper in bumpers:
+        window.blit(bumper.image, (bumper.x, bumper.y))
+
+    for bug in stationaryBugs:
+        collisionList = pygame.sprite.spritecollide(bug, bumpers, False)
+        if collisionList:
+            bug.bounce(collisionList)
+
     if playerFire:
         for bullet in playerFire:
             bullet.update()
             window.blit(bullet.image, (bullet.x, bullet.y))
+
 
     #controls - arrow keys and space bar actions
     keys = pygame.key.get_pressed()
@@ -94,8 +116,14 @@ while gamePlay:
             if collisionList:
                 playerFire.remove(bullet)
 
+    shipOnBugCollisionList = pygame.sprite.spritecollide(spaceShip, stationaryBugs, True)
+    if shipOnBugCollisionList:
+        shipAlive = False
+
     #redraw updates for this rotation
-    window.blit(spaceShip.image, (spaceShip.x, spaceShip.y))
+    if shipAlive:
+        window.blit(spaceShip.image, (spaceShip.x, spaceShip.y))
+        
     pygame.display.update()
 
 pygame.quit()
