@@ -1,9 +1,22 @@
 import pygame
+import bug
 pygame.init()
 
-window = pygame.display.set_mode((500, 500))
+screenHeight=500
+screenWidth=500
+window = pygame.display.set_mode((screenHeight, screenWidth))
 pygame.display.set_caption('Speedy Shooter')
 spaceShip = pygame.image.load('ship.png')
+
+#make target bugs
+stationaryBugs=pygame.sprite.Group()
+x=0
+for i in range(0,10):
+    bugTarget = bug.Bug('bug.png', 0+x, 50)
+    bugTarget.update_rect()
+    window.blit(bugTarget.image, (bugTarget.x, bugTarget.y))
+    stationaryBugs.add(bugTarget)
+    x = x+50
 
 #starting ship position coordinants
 x = 220
@@ -12,6 +25,7 @@ velocity = 10
 
 RED = (255, 0, 0)
 activeBullets = []
+
 
 gamePlay = True
 
@@ -50,6 +64,11 @@ while gamePlay:
         if event.type == pygame.QUIT:
             gamePlay = False
 
+     # draw/update stationary bugs group
+    for bug in stationaryBugs:
+        bug.update()
+        window.blit(bug.image, (bug.x, bug.y))
+
     #controls - arrow keys and space bar actions
     keys = pygame.key.get_pressed()
 
@@ -69,7 +88,6 @@ while gamePlay:
         if len(activeBullets) < 20:
             newShot = bullet(x, y)
             activeBullets.append(newShot)
-
 
     #fire the bullets
     for shots in activeBullets:
