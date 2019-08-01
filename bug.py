@@ -36,7 +36,7 @@ class Bug(pygame.sprite.Sprite):
         self.update_rect()
         randomNum= random.randint(1,10)
         if randomNum == 1:
-            newBullet= fire.Enemy_Fire(self)
+            newBullet= fire.Fire(self, "down")
             return newBullet
         return None
 
