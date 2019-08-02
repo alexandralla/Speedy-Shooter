@@ -29,7 +29,7 @@ pygame.display.set_caption('shooting test')
 DISPLAYSURF.fill(BLACK)
 
 bug1=bug.Bug('bug.png', screenWidth/2, screenHeight/2, 0, 0)
-newDebris=explosion.create_explosion(bug1, 7)
+newDebris=explosion.create_explosion(bug1)
 for particle in newDebris:
     debris.add(particle)
 

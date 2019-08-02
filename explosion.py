@@ -1,12 +1,13 @@
 import math
 import pygame, sys
 from pygame.locals import *
+import random
 
 class Explosion_Particle(pygame.sprite.Sprite):
     def __init__(self, ship, velocityX, velocityY):
         super().__init__()
         self.image = pygame.Surface([4, 4]) 
-        self.image.fill((128,   128,   128))
+        self.image.fill((125,   125,   125))
         self.rect = self.image.get_rect()
         self.x=ship.rect.center[0]
         self.y=ship.rect.center[1]
@@ -36,16 +37,16 @@ class Explosion_Particle(pygame.sprite.Sprite):
             self.velocityY = oldVelocityY     
         elif oldVelocityX == 0 and 0-oldVelocityY<0:
             self.velocityY= math.ceil(oldVelocityY + a)
-            print('1', self.velocityX, self.velocityY)
+            #print('1', self.velocityX, self.velocityY)
         elif oldVelocityX == 0 and 0-oldVelocityY>0:
             self.velocityY= math.floor(oldVelocityY - a)
-            print('2', self.velocityX, self.velocityY)
+            #print('2', self.velocityX, self.velocityY)
         elif oldVelocityY == 0 and 0-oldVelocityX<0:
             self.velocityX= math.ceil(oldVelocityX + a)
-            print('3', self.velocityX, self.velocityY)
+            #print('3', self.velocityX, self.velocityY)
         elif oldVelocityY == 0 and 0-oldVelocityX>0:
             self.velocityX= math.floor(oldVelocityX - a)
-            print('4', self.velocityX, self.velocityY)
+            #print('4', self.velocityX, self.velocityY)
         else:            
             oldVelocity = math.sqrt(oldVelocityX * oldVelocityX  + oldVelocityY * oldVelocityY)
             newVelocity = oldVelocity + acceleration 
@@ -59,23 +60,18 @@ class Explosion_Particle(pygame.sprite.Sprite):
                 self.velocityX = 0
                 self.VelocityY = 0
 
-def create_explosion(ship, v):
+       #a=1
+       #if random.randrange(0,4) == 0 and self.velocityX !=0:
+       #    self.velocityX=self.velocityX - a
+       #if random.randrange(0,4) == 0 and self.velocityY !=0:
+       #    self.velocityY=self.velocityY - a
 
-    p0=Explosion_Particle(ship, v, 0)
-    p1=Explosion_Particle(ship,  (math.cos(math.pi/4)*v), (math.sin(math.pi/4)*v))
-    p2=Explosion_Particle(ship, 0, v)
-    p3=Explosion_Particle(ship,  (math.cos(math.pi*7/4)*v), (math.sin(math.pi*7/4)*v))
-    p4=Explosion_Particle(ship, -v, 0)
-    p5=Explosion_Particle(ship, (math.cos(math.pi*5/4)*v), (math.sin(math.pi*5/4)*v))
-    p6=Explosion_Particle(ship, 0, -v)
-    p7=Explosion_Particle(ship, (math.cos(math.pi*3/4)*v), (math.sin(math.pi*3/4)*v))
+def create_explosion(ship, v=8):
+
     debris=[]
-    debris.append(p0)
-    debris.append(p1)
-    debris.append(p2)
-    debris.append(p3)
-    debris.append(p4)
-    debris.append(p5)
-    debris.append(p6)
-    debris.append(p7)
+    for i in range(0,12):
+        rad=i/2
+        if random.randrange(0,3) == 0:
+            rad=rad+.25
+        debris.append(Explosion_Particle(ship,  (math.cos(rad)*v), (math.sin(rad)*v)))
     return debris

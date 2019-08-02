@@ -89,7 +89,7 @@ while True:
         for bullet in activeFire:
             collisionList= pygame.sprite.spritecollide(bullet, stationaryBugs, True)
             if collisionList:
-                newDebris=explosion.create_explosion(bullet, 7)
+                newDebris=explosion.create_explosion(bullet)
                 for particle in newDebris:
                     debris.add(particle)
                 activeFire.remove(bullet)
