@@ -3,6 +3,7 @@ from pygame.locals import *
 import random
 import bug
 import fire
+import explosion
 
 #set up grid
 screenHeight=400
@@ -16,6 +17,7 @@ GREEN = (  0, 255,   0)
 BLUE  = (  0,   0, 255)
 
 # frames per second setting
+#FPS = 30
 FPS = 30
 fpsClock = pygame.time.Clock()
 
@@ -23,6 +25,7 @@ fpsClock = pygame.time.Clock()
 newFire=None
 collisionList=None
 activeFire=pygame.sprite.Group()
+debris=pygame.sprite.Group()
 
 pygame.init()
 DISPLAYSURF= pygame.display.set_mode((screenWidth, screenHeight))
@@ -86,7 +89,17 @@ while True:
         for bullet in activeFire:
             collisionList= pygame.sprite.spritecollide(bullet, stationaryBugs, True)
             if collisionList:
+                newDebris=explosion.create_explosion(bullet, 7)
+                for particle in newDebris:
+                    debris.add(particle)
                 activeFire.remove(bullet)
+
+    for particle in debris:
+        if particle.velocityX ==0 and particle.velocityY == 0:
+            debris.remove(particle)
+        else:
+            DISPLAYSURF.blit(particle.image, (particle.x, particle.y))
+            particle.update()
 
     for event in pygame.event.get():
         if event.type == QUIT:
