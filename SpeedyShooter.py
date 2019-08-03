@@ -109,9 +109,10 @@ while gamePlay:
             if collisionList:
                 playerFire.remove(bullet)
 
-    shipOnBugCollisionList = pygame.sprite.spritecollide(spaceShip, stationaryBugs, True)
-    if shipOnBugCollisionList:
-        shipAlive = False
+    if shipAlive:
+        shipOnBugCollisionList = pygame.sprite.spritecollide(spaceShip, stationaryBugs, True)
+        if shipOnBugCollisionList:
+            shipAlive = False
 
     #redraw updates for this rotation
     if shipAlive:
