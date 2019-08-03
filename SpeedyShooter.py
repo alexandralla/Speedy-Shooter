@@ -9,10 +9,11 @@ screenWidth=500
 window = pygame.display.set_mode((screenHeight, screenWidth))
 pygame.display.set_caption('Speedy Shooter')
 
-
 playerFire=pygame.sprite.Group()
 enemyFire=pygame.sprite.Group()
 spaceShip = ship.Ship(screenWidth/2, screenHeight - 50)
+bumpers=pygame.sprite.Group()
+stationaryBugs = pygame.sprite.Group()
 
 collisionList=None
 
@@ -21,28 +22,10 @@ bumperBottom=bug.Bumper('bottom', screenWidth, 1, 0, screenHeight-1)
 bumperRight=bug.Bumper('right', 1, screenHeight, screenWidth-1, 0)
 bumperLeft=bug.Bumper('left', 1, screenHeight, 0, 0)
 
-bumpers=pygame.sprite.Group()
 bumpers.add(bumperTop)
 bumpers.add(bumperRight)
 bumpers.add(bumperBottom)
 bumpers.add(bumperLeft)
-
-
-#make target bugs
-stationaryBugs=pygame.sprite.Group()
-x=0
-for i in range(0,10):
-    bugTarget = bug.Bug('bug.png', 0+x, 50, 5, 10)
-    bugTarget.update_rect()
-    window.blit(bugTarget.image, (bugTarget.x, bugTarget.y))
-    stationaryBugs.add(bugTarget)
-    x = x+50
-
-
-#starting ship position coordinants
-x = 220
-y = 450
-velocity = 10
 
 # set up the colors
 BLACK = (  0,   0,   0)
@@ -51,9 +34,20 @@ RED   = (255,   0,   0)
 GREEN = (  0, 255,   0)
 BLUE  = (  0,   0, 255)
 
+velocity = 10
+frame = 3
 
 gamePlay = True
 shipAlive = True
+
+#make target bugs
+x=0
+for i in range(0,10):
+    bugTarget = bug.Bug('bug.png', 0 + x, 50, 5, 10)
+    bugTarget.update_rect()
+    window.blit(bugTarget.image, (bugTarget.x, bugTarget.y))
+    stationaryBugs.add(bugTarget)
+    x = x + 50
 
 #while game is running
 while gamePlay:
@@ -84,28 +78,27 @@ while gamePlay:
             bullet.update()
             window.blit(bullet.image, (bullet.x, bullet.y))
 
-
     #controls - arrow keys and space bar actions
     keys = pygame.key.get_pressed()
 
-    if keys[pygame.K_LEFT] and x > 13:
+    if keys[pygame.K_LEFT] and spaceShip.x > 10:
         spaceShip.x -= velocity
         spaceShip.update_rect()
 
-    if keys[pygame.K_RIGHT] and x < 450:
+    if keys[pygame.K_RIGHT] and spaceShip.x < 450:
         spaceShip.x += velocity
         spaceShip.update_rect()
 
-    if keys[pygame.K_UP] and y > 0:
+    if keys[pygame.K_UP] and spaceShip.y > 10:
         spaceShip.y -= velocity
         spaceShip.update_rect()
 
-    if keys[pygame.K_DOWN] and y < 450:
+    if keys[pygame.K_DOWN] and spaceShip.y < 450:
         spaceShip.y += velocity
         spaceShip.update_rect()
 
     if keys[pygame.K_SPACE]:
-        if len(playerFire) < 20:
+        if shipAlive and frame % 3 == 0:
             newShot = fire.Fire(spaceShip, "up")
             playerFire.add(newShot)
 
@@ -123,7 +116,9 @@ while gamePlay:
     #redraw updates for this rotation
     if shipAlive:
         window.blit(spaceShip.image, (spaceShip.x, spaceShip.y))
-        
+
     pygame.display.update()
+
+    frame += 1
 
 pygame.quit()

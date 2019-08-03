@@ -4,7 +4,7 @@ from pygame.locals import *
 class Fire(pygame.sprite.Sprite):
     def __init__(self, shooter, direction):
         super().__init__()
-        self.image = pygame.Surface([3, 10]) 
+        self.image = pygame.Surface([3, 5])
         self.image.fill((255,   0,   0))
         self.rect = self.image.get_rect()
         self.x=shooter.rect.center[0]
