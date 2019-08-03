@@ -17,7 +17,7 @@ GREEN = (  0, 255,   0)
 BLUE  = (  0,   0, 255)
 
 # frames per second setting
-FPS = 30
+FPS = 1
 fpsClock = pygame.time.Clock()
 
 #initialize some variables
@@ -35,7 +35,10 @@ for particle in newDebris:
 
 while True:
     DISPLAYSURF.fill(BLACK)
+    count=0
     for particle in debris:
+        print('particle', count)
+        count = count +1
         DISPLAYSURF.blit(particle.image, (particle.x, particle.y))
         particle.update()
 
