@@ -51,29 +51,44 @@ class Explosion_Particle(pygame.sprite.Sprite):
         else:            
             oldVelocity = math.sqrt((oldVelocityX * oldVelocityX)  + (oldVelocityY * oldVelocityY))
             newVelocity = oldVelocity + acceleration 
+            
+            absVelocityX=abs(oldVelocityX)
+            absVelocityY=abs(oldVelocityY)
 
-            #angle = math.asin(oldVelocityY/oldVelocity)
-            angle = math.acos(oldVelocityX/oldVelocity)
+            angle = math.asin(absVelocityY/oldVelocity)
+            #angle = math.acos(oldVelocityX/oldVelocity)
             #angle = math.atan(oldVelocityY/oldVelocityX)
 
             newXVelocity = math.cos(angle)*newVelocity
             newYVelocity = math.sin(angle)*newVelocity
+
+            accX=absVelocityX - newXVelocity
+            accY=absVelocityY - newYVelocity
+            print('abs change in velocity: ', accX, accY)
+
+            randX=random.randrange(0,3)
+            randY=random.randrange(0,3)
+            if randX ==0:
+                accX=0
+            if randY ==0:
+                accY=0
             #moving down
             if 0-oldVelocityY<0:
-                self.velocityY= math.floor(newYVelocity)
+                self.velocityY= math.floor(self.velocityY-accY)
             #moving up
             else:
-                self.velocityY= math.ceil(newYVelocity)
+                self.velocityY= math.ceil(self.velocityY+accY)
             #moving right
             if 0-oldVelocityX<0:
-                self.velocityX= math.floor(newXVelocity)
+                self.velocityX= math.floor(self.velocityX - accX)
             #moving left
             else:
-                self.velocityX= math.ceil(newXVelocity)
+                self.velocityX= math.ceil(self.velocityX + accX)
 
         print(self.velocityX,', ', self.velocityY)
 
-def create_explosion(ship, v=8):
+
+def create_explosion(ship, v=6):
     BLACK = (  0,   0,   0)
     WHITE = (255, 255, 255)
     RED   = (255,   0,   0)
@@ -93,5 +108,5 @@ def create_explosion(ship, v=8):
             color=BLUE
         else:
             color=BLACK
-        debris.append(Explosion_Particle(ship,  (math.cos(rad)*v), (math.sin(rad)*v), color))
+        debris.append(Explosion_Particle(ship,  (math.cos(rad)*v), (math.sin(rad)*v), (125, 125, 125)))
     return debris

@@ -17,7 +17,7 @@ GREEN = (  0, 255,   0)
 BLUE  = (  0,   0, 255)
 
 # frames per second setting
-FPS = 1
+FPS = 10
 fpsClock = pygame.time.Clock()
 
 #initialize some variables
