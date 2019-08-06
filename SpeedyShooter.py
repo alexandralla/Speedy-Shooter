@@ -33,12 +33,27 @@ WHITE = (255, 255, 255)
 RED   = (255,   0,   0)
 GREEN = (  0, 255,   0)
 BLUE  = (  0,   0, 255)
+YELLOW= (255, 255,   0)
 
 velocity = 10
 frame = 3
 
 gamePlay = True
 shipAlive = True
+playerHealth = 480
+
+def healthBar(health):
+
+    if health > 350:
+        healthColor = GREEN
+    elif health > 150:
+        healthColor = YELLOW
+    elif health > 1:
+        healthColor = RED
+    else:
+        healthColor = BLACK
+
+    pygame.draw.rect(window, healthColor, (10, 10, health, 25))
 
 #make target bugs
 x=0
@@ -54,6 +69,8 @@ while gamePlay:
 
     pygame.time.wait(20)
     window.fill(BLACK)
+
+    healthBar(playerHealth)
 
     #check for game exit
     for event in pygame.event.get():
@@ -111,7 +128,9 @@ while gamePlay:
 
     shipOnBugCollisionList = pygame.sprite.spritecollide(spaceShip, stationaryBugs, True)
     if shipOnBugCollisionList:
-        shipAlive = False
+        playerHealth = playerHealth - 50
+        if playerHealth <= 0:
+            shipAlive = False
 
     #redraw updates for this rotation
     if shipAlive:
