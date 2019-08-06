@@ -115,7 +115,7 @@ while gamePlay:
         spaceShip.x += velocity
         spaceShip.update_rect()
 
-    if keys[pygame.K_UP] and spaceShip.y > 10:
+    if keys[pygame.K_UP] and spaceShip.y > 50:
         spaceShip.y -= velocity
         spaceShip.update_rect()
 
