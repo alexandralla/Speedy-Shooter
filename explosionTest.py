@@ -17,7 +17,7 @@ GREEN = (  0, 255,   0)
 BLUE  = (  0,   0, 255)
 
 # frames per second setting
-FPS = 30
+FPS = 10
 fpsClock = pygame.time.Clock()
 
 #initialize some variables
@@ -35,9 +35,18 @@ for particle in newDebris:
 
 while True:
     DISPLAYSURF.fill(BLACK)
-    for particle in debris:
-        DISPLAYSURF.blit(particle.image, (particle.x, particle.y))
-        particle.update()
+    if debris:
+        for particle in debris:
+            #print('particle', count)
+            DISPLAYSURF.blit(particle.image, (particle.x, particle.y))
+            particle.update()
+            if particle.velocityX == 0 and particle.velocityY == 0:
+                debris.remove(particle)
+                #print(particle.velocityX, " ", particle.velocityY)
+                if len(debris.sprites()) == 0:
+                    newDebris=explosion.create_explosion(particle)
+                    for p in newDebris:
+                        debris.add(p)
 
     for event in pygame.event.get():
         if event.type == QUIT:

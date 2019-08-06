@@ -4,10 +4,10 @@ from pygame.locals import *
 import random
 
 class Explosion_Particle(pygame.sprite.Sprite):
-    def __init__(self, ship, velocityX, velocityY):
+    def __init__(self, ship, velocityX, velocityY, color=(125, 125, 125)):
         super().__init__()
         self.image = pygame.Surface([4, 4]) 
-        self.image.fill((125,   125,   125))
+        self.image.fill(color)
         self.rect = self.image.get_rect()
         self.x=ship.rect.center[0]
         self.y=ship.rect.center[1]
@@ -20,58 +20,94 @@ class Explosion_Particle(pygame.sprite.Sprite):
         self.decelerate()
         
     def move(self):
-        self.x=self.x + self.velocityX
-        self.y=self.y + self.velocityY
+        self.x=self.x + int(self.velocityX)
+        self.y=self.y + int(self.velocityY)
 
     def update_rect(self):
         self.rect.x=self.x
         self.rect.y=self.y
 
     def decelerate(self, a=-1):
+        #print(self.velocityX, ', ', self.velocityY)
         acceleration=a
         oldVelocityX=self.velocityX        
         oldVelocityY=self.velocityY        
-        
-        if oldVelocityX ==0 and oldVelocityY ==0:
+        #particle is not moving  
+        if oldVelocityX == 0 and oldVelocityY == 0:
             self.velocityX = oldVelocityX       
             self.velocityY = oldVelocityY     
+        #moving down
         elif oldVelocityX == 0 and 0-oldVelocityY<0:
-            self.velocityY= math.ceil(oldVelocityY + a)
-            #print('1', self.velocityX, self.velocityY)
+            self.velocityY= math.floor(oldVelocityY + a)
+        #moving up
         elif oldVelocityX == 0 and 0-oldVelocityY>0:
-            self.velocityY= math.floor(oldVelocityY - a)
-            #print('2', self.velocityX, self.velocityY)
+            self.velocityY= math.ceil(oldVelocityY - a)
+        #moving right
         elif oldVelocityY == 0 and 0-oldVelocityX<0:
-            self.velocityX= math.ceil(oldVelocityX + a)
-            #print('3', self.velocityX, self.velocityY)
+            self.velocityX= math.floor(oldVelocityX + a)
+        #moving left
         elif oldVelocityY == 0 and 0-oldVelocityX>0:
-            self.velocityX= math.floor(oldVelocityX - a)
-            #print('4', self.velocityX, self.velocityY)
+            self.velocityX= math.ceil(oldVelocityX - a)
         else:            
-            oldVelocity = math.sqrt(oldVelocityX * oldVelocityX  + oldVelocityY * oldVelocityY)
+            oldVelocity = math.sqrt((oldVelocityX * oldVelocityX)  + (oldVelocityY * oldVelocityY))
             newVelocity = oldVelocity + acceleration 
-            angle = math.asin(oldVelocityY/oldVelocity)
-            newXVelocity = math.cos(angle)/newVelocity
-            newYVelocity = math.sin(angle)/newVelocity
-            if(newXVelocity == 0 and newYVelocity ==0):
-                self.velocityX = math.floor(newXVelocity)
-                self.VelocityY = math.floor(newYVelocity)
+            
+            absVelocityX=abs(oldVelocityX)
+            absVelocityY=abs(oldVelocityY)
+
+            angle = math.asin(absVelocityY/oldVelocity)
+            #angle = math.acos(oldVelocityX/oldVelocity)
+            #angle = math.atan(oldVelocityY/oldVelocityX)
+
+            newXVelocity = math.cos(angle)*newVelocity
+            newYVelocity = math.sin(angle)*newVelocity
+
+            accX=absVelocityX - newXVelocity
+            accY=absVelocityY - newYVelocity
+            #print('abs change in velocity: ', accX, accY)
+
+            randX=random.randrange(0,4)
+            randY=random.randrange(0,4)
+            if randX ==0:
+                accX=-2 * accX
+            if randY ==0:
+                accY=-2 * accY
+            #moving down
+            if 0-oldVelocityY<0:
+                self.velocityY= math.floor(self.velocityY-accY)
+            #moving up
             else:
-                self.velocityX = 0
-                self.VelocityY = 0
+                self.velocityY= math.ceil(self.velocityY+accY)
+            #moving right
+            if 0-oldVelocityX<0:
+                self.velocityX= math.floor(self.velocityX - accX)
+            #moving left
+            else:
+                self.velocityX= math.ceil(self.velocityX + accX)
 
-       #a=1
-       #if random.randrange(0,4) == 0 and self.velocityX !=0:
-       #    self.velocityX=self.velocityX - a
-       #if random.randrange(0,4) == 0 and self.velocityY !=0:
-       #    self.velocityY=self.velocityY - a
+        #print(self.velocityX,', ', self.velocityY)
 
-def create_explosion(ship, v=8):
 
+def create_explosion(ship, v=4):
+    BLACK = (  0,   0,   0)
+    WHITE = (255, 255, 255)
+    RED   = (255,   0,   0)
+    GREEN = (  0, 255,   0)
+    BLUE  = (  0,   0, 255)
     debris=[]
-    for i in range(0,12):
-        rad=i/2
-        if random.randrange(0,3) == 0:
-            rad=rad+.25
-        debris.append(Explosion_Particle(ship,  (math.cos(rad)*v), (math.sin(rad)*v)))
+    for i in range(0,24):
+        #rad=i/2
+        rad=i
+
+        if rad>=0 and rad<(math.pi/2):
+            color=WHITE
+        elif rad >= (math.pi/2) and rad < math.pi:
+            color=RED
+        elif rad>=(math.pi) and rad<((3 * math.pi)/2):
+            color=GREEN
+        elif rad >= ((3 * math.pi)/2) and rad < (math.pi*2):
+            color=BLUE
+        else:
+            color=BLACK
+        debris.append(Explosion_Particle(ship,  (math.cos(rad)*v), (math.sin(rad)*v), RED))
     return debris
