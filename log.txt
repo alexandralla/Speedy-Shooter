@@ -1,0 +1,253 @@
+pygame 2.0.0.dev2 (SDL 2.0.9, python 3.7.3)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+particle 0
+8.0 ,  0.0
+7 ,  0.0
+particle 1
+7.020660495122982 ,  3.835404308833624
+abs change in velocity:  0.8775825618903728 0.479425538604203
+6 ,  3
+particle 2
+4.322418446945118 ,  6.731767878463172
+abs change in velocity:  0.5403023058681398 0.8414709848078967
+3 ,  5
+particle 3
+0.5658976133416233 ,  7.979959892832436
+abs change in velocity:  0.07073720166770447 0.9974949866040541
+0 ,  6
+particle 4
+-3.3291746923771393 ,  7.274379414605454
+abs change in velocity:  0.416146836547143 0.9092974268256819
+-2 ,  6
+particle 5
+-6.40914892437547 ,  4.7877771528316515
+abs change in velocity:  0.8011436155469349 0.5984721441039564
+-5 ,  4
+particle 6
+-7.919939972803563 ,  1.1289600644789377
+abs change in velocity:  0.9899924966004461 0.14112000805986713
+-6 ,  0
+particle 7
+-7.491653498326371 ,  -2.8062658215169587
+abs change in velocity:  0.9364566872907965 0.3507832276896199
+-6 ,  -2
+particle 8
+-5.2291489669088955 ,  -6.054419962463426
+abs change in velocity:  0.6536436208636109 0.7568024953079284
+-4 ,  -5
+particle 9
+-1.6863663954462378 ,  -7.820240941320776
+abs change in velocity:  0.21079579943078253 0.977530117665097
+-1 ,  -6
+particle 10
+2.2692974837058104 ,  -7.671394197305108
+abs change in velocity:  0.2836621854632262 0.9589242746631381
+1 ,  -6
+particle 11
+5.66935819433008 ,  -5.644322604563135
+abs change in velocity:  0.70866977429126 0.705540325570392
+4 ,  -4
+particle 0
+7 ,  0.0
+6 ,  0.0
+particle 1
+6 ,  3
+abs change in velocity:  0.8944271909999157 0.44721359549995787
+5 ,  2
+particle 2
+3 ,  5
+abs change in velocity:  0.5144957554275256 0.8574929257125445
+2 ,  4
+particle 3
+0 ,  6
+0 ,  5
+particle 4
+-2 ,  6
+abs change in velocity:  0.3162277660168378 0.948683298050514
+-1 ,  5
+particle 5
+-5 ,  4
+abs change in velocity:  0.7808688094430307 0.6246950475544244
+-4 ,  3
+particle 6
+-6 ,  0
+-5 ,  0
+particle 7
+-6 ,  -2
+abs change in velocity:  0.948683298050514 0.3162277660168378
+-5 ,  -1
+particle 8
+-4 ,  -5
+abs change in velocity:  0.6246950475544244 0.7808688094430307
+-3 ,  -4
+particle 9
+-1 ,  -6
+abs change in velocity:  0.16439898730535774 0.9863939238321437
+0 ,  -5
+particle 10
+1 ,  -6
+abs change in velocity:  0.16439898730535774 0.9863939238321437
+0 ,  -5
+particle 11
+4 ,  -4
+abs change in velocity:  0.7071067811865466 0.7071067811865475
+3 ,  -3
+particle 0
+6 ,  0.0
+5 ,  0.0
+particle 1
+5 ,  2
+abs change in velocity:  0.92847669088526 0.37139067635410394
+4 ,  1
+particle 2
+2 ,  4
+abs change in velocity:  0.44721359549995743 0.8944271909999157
+1 ,  3
+particle 3
+0 ,  5
+0 ,  4
+particle 4
+-1 ,  5
+abs change in velocity:  0.19611613513818515 0.9805806756909199
+0 ,  4
+particle 5
+-4 ,  3
+abs change in velocity:  0.7999999999999998 0.6000000000000001
+-3 ,  2
+particle 6
+-5 ,  0
+-4 ,  0
+particle 7
+-5 ,  -1
+abs change in velocity:  0.9805806756909208 0.19611613513818404
+-4 ,  0
+particle 8
+-3 ,  -4
+abs change in velocity:  0.6000000000000001 0.7999999999999998
+-2 ,  -3
+particle 9
+0 ,  -5
+0 ,  -4
+particle 10
+0 ,  -5
+0 ,  -4
+particle 11
+3 ,  -3
+abs change in velocity:  0.7071067811865479 0.7071067811865475
+2 ,  -2
+particle 0
+5 ,  0.0
+4 ,  0.0
+particle 1
+4 ,  1
+abs change in velocity:  0.9701425001453319 0.24253562503633297
+3 ,  0
+particle 2
+1 ,  3
+abs change in velocity:  0.3162277660168379 0.9486832980505135
+0 ,  2
+particle 3
+0 ,  4
+0 ,  3
+particle 4
+0 ,  4
+0 ,  3
+particle 5
+-3 ,  2
+abs change in velocity:  0.832050294337844 0.5547001962252291
+-2 ,  1
+particle 6
+-4 ,  0
+-3 ,  0
+particle 7
+-4 ,  0
+-3 ,  0
+particle 8
+-2 ,  -3
+abs change in velocity:  0.5547001962252294 0.8320502943378436
+-1 ,  -2
+particle 9
+0 ,  -4
+0 ,  -3
+particle 10
+0 ,  -4
+0 ,  -3
+particle 11
+2 ,  -2
+abs change in velocity:  0.707106781186547 0.7071067811865475
+1 ,  -1
+particle 0
+4 ,  0.0
+3 ,  0.0
+particle 1
+3 ,  0
+2 ,  0
+particle 2
+0 ,  2
+0 ,  1
+particle 3
+0 ,  3
+0 ,  2
+particle 4
+0 ,  3
+0 ,  2
+particle 5
+-2 ,  1
+abs change in velocity:  0.8944271909999157 0.44721359549995787
+-1 ,  0
+particle 6
+-3 ,  0
+-2 ,  0
+particle 7
+-3 ,  0
+-2 ,  0
+particle 8
+-1 ,  -2
+abs change in velocity:  0.44721359549995776 0.8944271909999157
+0 ,  -1
+particle 9
+0 ,  -3
+0 ,  -2
+particle 10
+0 ,  -3
+0 ,  -2
+particle 11
+1 ,  -1
+abs change in velocity:  0.7071067811865475 0.7071067811865475
+0 ,  0
+particle 0
+3 ,  0.0
+2 ,  0.0
+particle 1
+2 ,  0
+1 ,  0
+particle 2
+0 ,  1
+0 ,  0
+particle 3
+0 ,  2
+0 ,  1
+particle 4
+0 ,  2
+0 ,  1
+particle 5
+-1 ,  0
+0 ,  0
+particle 6
+-2 ,  0
+-1 ,  0
+particle 7
+-2 ,  0
+-1 ,  0
+particle 8
+0 ,  -1
+0 ,  0
+particle 9
+0 ,  -2
+0 ,  -1
+particle 10
+0 ,  -2
+0 ,  -1
+particle 11
+0 ,  0
+0 ,  0
