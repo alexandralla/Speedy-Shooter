@@ -42,7 +42,8 @@ gamePlay = True
 shipAlive = True
 playerHealth = 400
 
-myFont = pygame.font.SysFont("Source Code Pro", 20)
+scoreFont = pygame.font.SysFont("Source Code Pro", 20)
+gameOverFont = pygame.font.SysFont("Source Code Pro", 30)
 score = 0
 scoreLabel = "SCORE: "
 
@@ -75,8 +76,8 @@ while gamePlay:
     window.fill(BLACK)
 
     healthBar(playerHealth)
-    scoreLabel = myFont.render("SCORE: ", 1, WHITE)
-    scoreDisplay = myFont.render(str(score), 1, WHITE)
+    scoreLabel = scoreFont.render("SCORE: ", 1, WHITE)
+    scoreDisplay = scoreFont.render(str(score), 1, WHITE)
 
     #check for game exit
     for event in pygame.event.get():
@@ -135,13 +136,20 @@ while gamePlay:
 
     shipOnBugCollisionList = pygame.sprite.spritecollide(spaceShip, stationaryBugs, True)
     if shipOnBugCollisionList:
-        playerHealth = playerHealth - 50
+        playerHealth = playerHealth - 100
         if playerHealth <= 0:
             shipAlive = False
 
     #redraw updates for this rotation
     if shipAlive:
         window.blit(spaceShip.image, (spaceShip.x, spaceShip.y))
+    else:
+        gameOver = gameOverFont.render("GAME OVER! ", 1, WHITE)
+        finalScoreLabel = gameOverFont.render("FINAL SCORE: ", 1, WHITE)
+        finalScoreDisplay = gameOverFont.render(str(score), 1, WHITE)
+        window.blit(gameOver, (180, 250))
+        window.blit(finalScoreLabel, (160, 280))
+        window.blit(finalScoreDisplay, (310, 280))
 
     window.blit(scoreLabel, (415, 15))
     window.blit(scoreDisplay, (465, 15))
