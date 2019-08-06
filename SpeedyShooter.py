@@ -40,15 +40,19 @@ frame = 3
 
 gamePlay = True
 shipAlive = True
-playerHealth = 480
+playerHealth = 400
+
+myFont = pygame.font.SysFont("Source Code Pro", 20)
+score = 0
+scoreLabel = "SCORE: "
 
 def healthBar(health):
 
-    if health > 350:
+    if health > 300:
         healthColor = GREEN
-    elif health > 150:
+    elif health > 200:
         healthColor = YELLOW
-    elif health > 1:
+    elif health > 100:
         healthColor = RED
     else:
         healthColor = BLACK
@@ -71,6 +75,8 @@ while gamePlay:
     window.fill(BLACK)
 
     healthBar(playerHealth)
+    scoreLabel = myFont.render("SCORE: ", 1, WHITE)
+    scoreDisplay = myFont.render(str(score), 1, WHITE)
 
     #check for game exit
     for event in pygame.event.get():
@@ -125,6 +131,7 @@ while gamePlay:
             collisionList = pygame.sprite.spritecollide(bullet, stationaryBugs, True)
             if collisionList:
                 playerFire.remove(bullet)
+                score += 1
 
     shipOnBugCollisionList = pygame.sprite.spritecollide(spaceShip, stationaryBugs, True)
     if shipOnBugCollisionList:
@@ -136,6 +143,8 @@ while gamePlay:
     if shipAlive:
         window.blit(spaceShip.image, (spaceShip.x, spaceShip.y))
 
+    window.blit(scoreLabel, (415, 15))
+    window.blit(scoreDisplay, (465, 15))
     pygame.display.update()
 
     frame += 1
