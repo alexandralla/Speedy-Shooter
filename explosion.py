@@ -28,7 +28,7 @@ class Explosion_Particle(pygame.sprite.Sprite):
         self.rect.y=self.y
 
     def decelerate(self, a=-1):
-        print(self.velocityX, ', ', self.velocityY)
+        #print(self.velocityX, ', ', self.velocityY)
         acceleration=a
         oldVelocityX=self.velocityX        
         oldVelocityY=self.velocityY        
@@ -64,14 +64,14 @@ class Explosion_Particle(pygame.sprite.Sprite):
 
             accX=absVelocityX - newXVelocity
             accY=absVelocityY - newYVelocity
-            print('abs change in velocity: ', accX, accY)
+            #print('abs change in velocity: ', accX, accY)
 
-            randX=random.randrange(0,3)
-            randY=random.randrange(0,3)
+            randX=random.randrange(0,4)
+            randY=random.randrange(0,4)
             if randX ==0:
-                accX=0
+                accX=-2 * accX
             if randY ==0:
-                accY=0
+                accY=-2 * accY
             #moving down
             if 0-oldVelocityY<0:
                 self.velocityY= math.floor(self.velocityY-accY)
@@ -85,18 +85,19 @@ class Explosion_Particle(pygame.sprite.Sprite):
             else:
                 self.velocityX= math.ceil(self.velocityX + accX)
 
-        print(self.velocityX,', ', self.velocityY)
+        #print(self.velocityX,', ', self.velocityY)
 
 
-def create_explosion(ship, v=6):
+def create_explosion(ship, v=4):
     BLACK = (  0,   0,   0)
     WHITE = (255, 255, 255)
     RED   = (255,   0,   0)
     GREEN = (  0, 255,   0)
     BLUE  = (  0,   0, 255)
     debris=[]
-    for i in range(0,12):
-        rad=i/2
+    for i in range(0,24):
+        #rad=i/2
+        rad=i
 
         if rad>=0 and rad<(math.pi/2):
             color=WHITE
@@ -108,5 +109,5 @@ def create_explosion(ship, v=6):
             color=BLUE
         else:
             color=BLACK
-        debris.append(Explosion_Particle(ship,  (math.cos(rad)*v), (math.sin(rad)*v), (125, 125, 125)))
+        debris.append(Explosion_Particle(ship,  (math.cos(rad)*v), (math.sin(rad)*v), RED))
     return debris

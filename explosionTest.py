@@ -35,12 +35,18 @@ for particle in newDebris:
 
 while True:
     DISPLAYSURF.fill(BLACK)
-    count=0
-    for particle in debris:
-        print('particle', count)
-        count = count +1
-        DISPLAYSURF.blit(particle.image, (particle.x, particle.y))
-        particle.update()
+    if debris:
+        for particle in debris:
+            #print('particle', count)
+            DISPLAYSURF.blit(particle.image, (particle.x, particle.y))
+            particle.update()
+            if particle.velocityX == 0 and particle.velocityY == 0:
+                debris.remove(particle)
+                #print(particle.velocityX, " ", particle.velocityY)
+                if len(debris.sprites()) == 0:
+                    newDebris=explosion.create_explosion(particle)
+                    for p in newDebris:
+                        debris.add(p)
 
     for event in pygame.event.get():
         if event.type == QUIT:
