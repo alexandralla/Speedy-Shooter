@@ -36,7 +36,7 @@ BLUE  = (  0,   0, 255)
 YELLOW= (255, 255,   0)
 
 velocity = 10
-frame = 3
+frame = 4
 
 gamePlay = True
 shipAlive = True
@@ -51,9 +51,9 @@ def healthBar(health):
 
     if health > 300:
         healthColor = GREEN
-    elif health > 200:
+    elif health > 150:
         healthColor = YELLOW
-    elif health > 100:
+    elif health > 50:
         healthColor = RED
     else:
         healthColor = BLACK
@@ -63,17 +63,19 @@ def healthBar(health):
 #make target bugs
 x=0
 for i in range(0,10):
-    bugTarget = bug.Bug('bug.png', 0 + x, 50, 5, 10)
+    bugTarget = bug.Bug('bug.png', 0 + x, 50, 5, 1)
     bugTarget.update_rect()
     window.blit(bugTarget.image, (bugTarget.x, bugTarget.y))
     stationaryBugs.add(bugTarget)
     x = x + 50
+
 
 #while game is running
 while gamePlay:
 
     pygame.time.wait(20)
     window.fill(BLACK)
+
 
     healthBar(playerHealth)
     scoreLabel = scoreFont.render("SCORE: ", 1, WHITE)
@@ -122,7 +124,7 @@ while gamePlay:
         spaceShip.update_rect()
 
     if keys[pygame.K_SPACE]:
-        if shipAlive and frame % 3 == 0:
+        if shipAlive and frame % 4 == 0:
             newShot = fire.Fire(spaceShip, "up")
             playerFire.add(newShot)
 
