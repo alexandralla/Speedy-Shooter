@@ -33,27 +33,53 @@ WHITE = (255, 255, 255)
 RED   = (255,   0,   0)
 GREEN = (  0, 255,   0)
 BLUE  = (  0,   0, 255)
+YELLOW= (255, 255,   0)
 
 velocity = 10
-frame = 3
+frame = 4
 
 gamePlay = True
 shipAlive = True
+playerHealth = 400
+
+scoreFont = pygame.font.SysFont("Source Code Pro", 20)
+gameOverFont = pygame.font.SysFont("Source Code Pro", 30)
+score = 0
+scoreLabel = "SCORE: "
+
+def healthBar(health):
+
+    if health > 300:
+        healthColor = GREEN
+    elif health > 150:
+        healthColor = YELLOW
+    elif health > 50:
+        healthColor = RED
+    else:
+        healthColor = BLACK
+
+    pygame.draw.rect(window, healthColor, (10, 10, health, 25))
 
 #make target bugs
 x=0
 for i in range(0,10):
-    bugTarget = bug.Bug('bug.png', 0 + x, 50, 5, 10)
+    bugTarget = bug.Bug('bug.png', 0 + x, 50, 5, 1)
     bugTarget.update_rect()
     window.blit(bugTarget.image, (bugTarget.x, bugTarget.y))
     stationaryBugs.add(bugTarget)
     x = x + 50
+
 
 #while game is running
 while gamePlay:
 
     pygame.time.wait(20)
     window.fill(BLACK)
+
+
+    healthBar(playerHealth)
+    scoreLabel = scoreFont.render("SCORE: ", 1, WHITE)
+    scoreDisplay = scoreFont.render(str(score), 1, WHITE)
 
     #check for game exit
     for event in pygame.event.get():
@@ -98,7 +124,7 @@ while gamePlay:
         spaceShip.update_rect()
 
     if keys[pygame.K_SPACE]:
-        if shipAlive and frame % 3 == 0:
+        if shipAlive and frame % 4 == 0:
             newShot = fire.Fire(spaceShip, "up")
             playerFire.add(newShot)
 
@@ -108,16 +134,28 @@ while gamePlay:
             collisionList = pygame.sprite.spritecollide(bullet, stationaryBugs, True)
             if collisionList:
                 playerFire.remove(bullet)
+                score += 1
 
     if shipAlive:
         shipOnBugCollisionList = pygame.sprite.spritecollide(spaceShip, stationaryBugs, True)
         if shipOnBugCollisionList:
+            playerHealth = playerHealth - 100
+        if playerHealth <= 0:
             shipAlive = False
 
     #redraw updates for this rotation
     if shipAlive:
         window.blit(spaceShip.image, (spaceShip.x, spaceShip.y))
+    else:
+        gameOver = gameOverFont.render("GAME OVER! ", 1, WHITE)
+        finalScoreLabel = gameOverFont.render("FINAL SCORE: ", 1, WHITE)
+        finalScoreDisplay = gameOverFont.render(str(score), 1, WHITE)
+        window.blit(gameOver, (180, 250))
+        window.blit(finalScoreLabel, (160, 280))
+        window.blit(finalScoreDisplay, (310, 280))
 
+    window.blit(scoreLabel, (415, 15))
+    window.blit(scoreDisplay, (465, 15))
     pygame.display.update()
 
     frame += 1
