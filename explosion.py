@@ -94,6 +94,8 @@ def create_explosion(ship, v=4):
     RED   = (255,   0,   0)
     GREEN = (  0, 255,   0)
     BLUE  = (  0,   0, 255)
+    YELLOW = (255, 255,  0)
+    ORANGE = (255, 200, 0)
     debris=[]
     for i in range(0,24):
         #rad=i/2
@@ -109,5 +111,5 @@ def create_explosion(ship, v=4):
             color=BLUE
         else:
             color=BLACK
-        debris.append(Explosion_Particle(ship,  (math.cos(rad)*v), (math.sin(rad)*v), RED))
+        debris.append(Explosion_Particle(ship,  (math.cos(rad)*v), (math.sin(rad)*v), ORANGE))
     return debris

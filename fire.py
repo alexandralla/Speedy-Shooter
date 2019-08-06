@@ -2,7 +2,7 @@ import pygame, sys
 from pygame.locals import *
 
 class Fire(pygame.sprite.Sprite):
-    def __init__(self, shooter, direction):
+    def __init__(self, shooter, direction, velocity = 5):
         super().__init__()
         self.image = pygame.Surface([3, 5])
         self.image.fill((255,   0,   0))
@@ -11,9 +11,9 @@ class Fire(pygame.sprite.Sprite):
         self.y=shooter.rect.center[1]
         self.velocityX=0
         if (direction == "up"):
-            self.velocityY=-5
+            self.velocityY= velocity * -1.5
         if (direction == "down"):
-            self.velocityY=5
+            self.velocityY= velocity
 
     def update(self):
         self.move()

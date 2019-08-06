@@ -10,6 +10,8 @@ class Ship(pygame.sprite.Sprite):
         self.y = y
         self.rect = self.image.get_rect()
         self.update_rect()
+        self.count = 0
+        self.hasFired = False
 
 
     def update_rect(self):
