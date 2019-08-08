@@ -5,7 +5,7 @@ import fire
 #import move as mv
 
 class Bug(pygame.sprite.Sprite):
-    def __init__(self, img, x, y, xVelocity=0, yVelocity=0, move=None):
+    def __init__(self, img, x, y, xVelocity=0, yVelocity=0, firingPeriod=80, move=None):
         #pygame.sprite.Sprite.init(self)
         super().__init__()
         self.image = pygame.image.load(img)
@@ -14,6 +14,8 @@ class Bug(pygame.sprite.Sprite):
         self.xVelocity=xVelocity
         self.yVelocity=yVelocity
         self.rect = self.image.get_rect()
+        self.count=random.randint(0, firingPeriod+1)
+        self.firingPeriod=firingPeriod
         if move is None:
             self.move=simple_move
         else:
@@ -32,10 +34,10 @@ class Bug(pygame.sprite.Sprite):
 
     def update(self):
         global activeFire
+        self.count=(self.count + 1)%self.firingPeriod
         self.move(self)
         self.update_rect()
-        randomNum= random.randint(1,10)
-        if randomNum == 1:
+        if self.count == 0:
             newBullet= fire.Fire(self, "down")
             return newBullet
         return None
