@@ -1,5 +1,5 @@
 import pygame
-import bug
+import bug as bg
 import fire
 import ship
 import explosion
@@ -22,16 +22,21 @@ debris = pygame.sprite.Group()
 
 collisionList=None
 healthBarHeight = 25
+levelCount = 1
 
-bumperTop=bug.Bumper('top', screenWidth, 1, 0, healthBarHeight+25)
-bumperBottom=bug.Bumper('bottom', screenWidth, 1, 0, screenHeight-1)
-bumperRight=bug.Bumper('right', 1, screenHeight, screenWidth-1, 0)
-bumperLeft=bug.Bumper('left', 1, screenHeight, 0, 0)
+bumperTop=bg.Bumper('top', screenWidth, 1, 0, healthBarHeight+25)
+bumperBottom=bg.Bumper('bottom', screenWidth, 1, 0, screenHeight-1)
+bumperRight=bg.Bumper('right', 1, screenHeight, screenWidth-1, 0)
+bumperLeft=bg.Bumper('left', 1, screenHeight, 0, 0)
 
 bumpers.add(bumperTop)
 bumpers.add(bumperRight)
 bumpers.add(bumperBottom)
 bumpers.add(bumperLeft)
+
+bugXVelocity = 3
+bugYVelovity = 1
+bugFiringPeriod = 80
 
 # set up the colors
 BLACK = (  0,   0,   0)
@@ -66,14 +71,15 @@ def healthBar(health):
 
     pygame.draw.rect(window, healthColor, (10, 10, health, healthBarHeight))
 
-#make target bugs
-x=0
-for i in range(0,10):
-    bugTarget = bug.Bug('bug.png', 0 + x, 50, 5, 1)
-    bugTarget.update_rect()
-    window.blit(bugTarget.image, (bugTarget.x, bugTarget.y))
-    stationaryBugs.add(bugTarget)
-    x = x + 50
+# #make target bugs
+# x=0
+# for i in range(0,10):
+#     bugTarget = bug.Bug('bug.png', 0 + x, 50, 5, 1)
+#     bugTarget.update_rect()
+#     window.blit(bugTarget.image, (bugTarget.x, bugTarget.y))
+#     stationaryBugs.add(bugTarget)
+#     x = x + 50
+
 
 
 #while game is running
@@ -141,7 +147,9 @@ while gamePlay:
         if shipAlive:
             spaceShip.hasFired = True
 
-    if spaceShip.hasFired == True and spaceShip.count % 5 == 0:
+
+
+    if spaceShip.hasFired == True and spaceShip.count % 4 == 0:
         newShot = fire.Fire(spaceShip, "up")
         playerFire.add(newShot)
         spaceShip.hasFired = False
@@ -181,6 +189,27 @@ while gamePlay:
     for particle in debris:
         if particle.velocityX ==0 and particle.velocityY == 0:
             debris.remove(particle)
+
+    if len(stationaryBugs) == 0:
+        # levelCount += 1
+        # levelComplete = gameOverFont.render("LEVEL", 1, WHITE)
+        # levelNum = gameOverFont.render(str(levelCount), 1, WHITE)
+        # window.blit(levelComplete, (180, 250))
+        # window.blit(levelNum, (270, 250))
+        # pygame.time.delay(100)
+        # make target bugs
+        bugXVelocity += 1
+        bugYVelovity += 1
+        bugFiringPeriod -= 4
+        x = 0
+
+        for i in range(0, 10):
+            bugTarget = None
+            bugTarget = bg.Bug('bug.png', 0 + x, 50, bugXVelocity, bugYVelovity, bugFiringPeriod)
+         #   bugTarget.update_rect()
+            window.blit(bugTarget.image, (bugTarget.x, bugTarget.y))
+            stationaryBugs.add(bugTarget)
+            x = x + 50
 
     if shipAlive:
         window.blit(spaceShip.image, (spaceShip.x, spaceShip.y))
