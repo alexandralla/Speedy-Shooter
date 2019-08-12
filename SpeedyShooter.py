@@ -230,6 +230,9 @@ def mainLoop():
         if shipAlive:
             shipOnBugCollisionList = pygame.sprite.spritecollide(spaceShip, stationaryBugs, True)
             if shipOnBugCollisionList:
+                newDebris=explosion.create_explosion(spaceShip)
+                for p in newDebris:
+                    debris.add(p)
                 pygame.mixer.Sound.play(explosion_sound)
                 playerHealth = playerHealth - 25
             if playerHealth <= 0:
@@ -249,7 +252,7 @@ def mainLoop():
 
             for i in range(0, 10):
                 bugTarget = None
-                bugTarget = bg.Bug('bug.png', 0 + x, 50, bugXVelocity, bugYVelovity, bugFiringPeriod)
+                bugTarget = bg.Bug('aliensprite2.png', 0 + x, 50, bugXVelocity, bugYVelovity, bugFiringPeriod)
                 #   bugTarget.update_rect()
                 window.blit(bugTarget.image, (bugTarget.x, bugTarget.y))
                 stationaryBugs.add(bugTarget)

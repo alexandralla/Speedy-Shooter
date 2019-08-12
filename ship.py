@@ -2,7 +2,7 @@ import pygame
 
 
 class Ship(pygame.sprite.Sprite):
-    def __init__(self, x, y, shipImage = 'ship.png'):
+    def __init__(self, x, y, shipImage = 'medfighter.png'):
         #pygame.sprite.Sprite.init(self)
         super().__init__()
         self.image = pygame.image.load(shipImage)
