@@ -3,7 +3,6 @@ import bug as bg
 import fire
 import ship
 import explosion
-import random
 
 
 pygame.init()
@@ -223,7 +222,7 @@ def mainLoop():
                     debris.add(particle)
                 score += 1
 
-                playerHealth = playerHealth - 50
+                playerHealth = playerHealth - 25
 
                 if playerHealth <= 0:
                     shipAlive = False
@@ -232,7 +231,7 @@ def mainLoop():
             shipOnBugCollisionList = pygame.sprite.spritecollide(spaceShip, stationaryBugs, True)
             if shipOnBugCollisionList:
                 pygame.mixer.Sound.play(explosion_sound)
-                playerHealth = playerHealth - 100
+                playerHealth = playerHealth - 25
             if playerHealth <= 0:
                 shipAlive = False
 
@@ -240,15 +239,10 @@ def mainLoop():
             if particle.velocityX == 0 and particle.velocityY == 0:
                 debris.remove(particle)
 
-        if len(stationaryBugs) == 0:
-            # levelCount += 1
-            # levelComplete = gameOverFont.render("LEVEL", 1, WHITE)
-            # levelNum = gameOverFont.render(str(levelCount), 1, WHITE)
-            # window.blit(levelComplete, (180, 250))
-            # window.blit(levelNum, (270, 250))
-            # pygame.time.delay(100)
+        if len(stationaryBugs) <= 3:
+            levelCount += 1
             # make target bugs
-            bugXVelocity += 1
+            bugXVelocity += 1 * -1
             bugYVelovity += 1
             bugFiringPeriod -= 4
             x = 0
