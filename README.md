@@ -32,7 +32,7 @@ To build and run, type the following into the command line:
 Python3 SpeedyShooter.py
 ```
 
-##Credits
+## Credits
 
 Spaceship and enemy ship images credited to [MillionthVector](http://millionthvector.blogspot.com/p/free-sprites.html?m=1), licensed under a Creative Commons Attribution 4.0 International License.
 
