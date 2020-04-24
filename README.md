@@ -9,6 +9,8 @@ This project is a simple game based on the classic arcade game Galaga. When run,
 The controls the user has are spacebar to shoot and the left/right arrow keys.
 The objective of the game is to live as long as possible by shooting invaders before they get too close! 
 
+![Speedy Shooter Demo](shooterdemo.gif)
+
 ## Installation, Build, and Run
 Before running, use the package manager pip to install pygame.
 
@@ -31,9 +33,6 @@ To build and run, type the following into the command line:
 ```
 Python3 SpeedyShooter.py
 ```
-
-## Demo
-![Speedy Shooter Demo](shooterdemo.gif)
 
 ## Credits
 
